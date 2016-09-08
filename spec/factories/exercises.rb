@@ -1,6 +1,14 @@
 FactoryGirl.define do
-  factory :exercise_benchpress, class: :exercise do
-    name 'Benchpress'
+  factory :exercise do
+    name 'Exercise'
+
+    factory :exercise_benchpress do
+      name 'Benchpress'
+    end
+
+    factory :exercise_squat do
+      name 'Squat'
+    end
 
     trait :with_categories do
       after(:create) do |instance|

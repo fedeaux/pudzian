@@ -9,6 +9,7 @@ class ExercisesController < ApplicationController
 
   # GET /exercises/1
   def show
+    render :show
   end
 
   private

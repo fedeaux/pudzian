@@ -17,22 +17,16 @@ RSpec.describe "Exercises", type: :request do
         expect(JSON.parse(response.body)).to have_key 'exercises'
       end
 
-      it 'includes a list of all categories present on some exercise' do
+      it 'includes a list of categories for each exercise' do
         exercise = create :exercise_benchpress, :with_categories
         get exercises_path, headers: @request_headers
         json_response = JSON.parse response.body
 
-        response_categories_names = json_response['categories'].map{ |category|
+        first_exercise_categories_names = json_response['exercises'][0]['categories'].map { |category|
           category['name']
         }.sort
 
-        expect(response_categories_names).to eq exercise.categories.map(&:name).sort
-      end
-
-      it 'includes an empty list of categories if no exercise exists' do
-        exercise = create :exercise_benchpress
-        get exercises_path, headers: @request_headers
-        expect(JSON.parse(response.body)['categories']).to be_empty
+        expect(first_exercise_categories_names).to eq exercise.categories.map(&:name).sort
       end
     end
   end

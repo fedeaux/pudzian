@@ -25,4 +25,27 @@ RSpec.describe "ExerciseStrenghtTest", type: :request do
       expect(json_response['exercise_strenght_test']['precision'].to_f).to eq 1.0
     end
   end
+
+  describe "POST exercise_strenght_test" do
+    let(:exercise_strenght_test_attributes) { attributes_for :exercise_strenght_test }
+
+    before :each do
+      set_request_headers_for :user_ray
+    end
+
+    it 'creates and returns an ExerciseStrenghtTest' do
+      params = exercise_strenght_test_attributes
+      params['exercise_id'] = params[:exercise][:id]
+
+      post exercise_strenght_tests_path,
+        params: { exercise_strenght_test: exercise_strenght_test_attributes },
+        headers: @request_headers
+
+      json_response = JSON.parse response.body
+      expect(json_response['exercise_strenght_test']['exercise_id']).to eq params['exercise_id']
+
+      exercise_strenght_test = ExerciseStrenghtTest.find json_response['exercise_strenght_test']['id']
+      expect(exercise_strenght_test.user.id).to eq params[:user][:id]
+    end
+  end
 end

@@ -3,8 +3,7 @@ class ExercisesController < ApplicationController
 
   # GET /exercises
   def index
-    @exercises = Exercise.all
-    @categories = @exercises.map(&:categories).flatten.uniq
+    @exercises = Exercise.all.map{ |exercise| exercise.set_has_strenght_test(current_user) }
     render :index
   end
 

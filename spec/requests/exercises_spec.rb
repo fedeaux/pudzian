@@ -17,8 +17,25 @@ RSpec.describe "Exercises", type: :request do
         expect(JSON.parse(response.body)).to have_key 'exercises'
       end
 
+      it 'includes whether the exercise has a strenght test for the current user' do
+        exercise_benchpress = create :exercise_benchpress, :with_categories
+        exercise_squat = create :exercise_squat, :with_categories
+        strenght_test = create :exercise_strenght_test, exercise: exercise_squat
+
+        get exercises_path, headers: @request_headers
+        json_response = JSON.parse response.body
+
+        if json_response['exercises'].first['name'] == exercise_benchpress.name
+          expect(json_response['exercises'].first['has_strenght_test']).to eq false
+          expect(json_response['exercises'].second['has_strenght_test']).to eq true
+        else
+          expect(json_response['exercises'].first['has_strenght_test']).to eq true
+          expect(json_response['exercises'].second['has_strenght_test']).to eq false
+        end
+      end
+
       it 'includes a list of categories for each exercise' do
-        exercise = create :exercise_benchpress, :with_categories
+        exercise = create :exercise_benchpress
         get exercises_path, headers: @request_headers
         json_response = JSON.parse response.body
 

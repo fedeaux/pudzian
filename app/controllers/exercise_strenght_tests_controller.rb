@@ -2,12 +2,10 @@ class ExerciseStrenghtTestsController < ApplicationController
   # GET /exercises
   def index
     if params[:exercise_id]
-      @exercise_strenght_test = Exercise.find(params[:exercise_id]).strenght_test current_user
-      if @exercise_strenght_test
-        render :show
-      else
-        head 200
-      end
+      exercise = Exercise.find params[:exercise_id]
+      @exercise_strenght_test = exercise.strenght_test current_user
+      @exercise_strenght_test = ExerciseStrenghtTest.new(exercise: exercise) unless @exercise_strenght_test
+      render :show
     end
   end
 

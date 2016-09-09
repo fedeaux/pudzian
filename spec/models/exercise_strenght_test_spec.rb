@@ -8,9 +8,9 @@ RSpec.describe ExerciseStrenghtTest, type: :model do
   end
 
   describe '.default_mr_weights' do
-    it 'returns a hash with the REPETITION_REGIONS set to -1' do
+    it 'returns a hash with the REPETITION_REGIONS set to nil' do
       expect(ExerciseStrenghtTest.default_mr_weights.keys).to eq ExerciseStrenghtTest::REPETITION_REGIONS
-      expect(ExerciseStrenghtTest.default_mr_weights.values.uniq.first).to eq (-1)
+      expect(ExerciseStrenghtTest.default_mr_weights.values.uniq.first).to eq nil
     end
   end
 
@@ -34,7 +34,7 @@ RSpec.describe ExerciseStrenghtTest, type: :model do
     it 'can be set' do
       exercise_strenght_test = ExerciseStrenghtTest.new exercise_strenght_test_attributes.except(:mr_weights)
       exercise_strenght_test.mr_weights = { 1 => 50, 2 => 45 }
-      expect(exercise_strenght_test.mr_weights.values.uniq).to eq [50, 45, -1]
+      expect(exercise_strenght_test.mr_weights.values.uniq).to eq [50, 45, nil]
     end
   end
 end

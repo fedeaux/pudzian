@@ -17,9 +17,10 @@ RSpec.describe "ExerciseStrenghtTest", type: :request do
       expect(json_response['exercise_strenght_test']['mr_weights'].values).to eq exercise_strenght_test.mr_weights.values
     end
 
-    it 'returns a blank response if the is no ExerciseStrenghtTest for the exercise' do
+    it 'returns an empty default ExerciseStrenghtTest if the is no ExerciseStrenghtTest for the exercise' do
       get exercise_strenght_tests_path(exercise_id: exercise.id), headers: @request_headers
-      expect(response.body).to be_empty
+      json_response = JSON.parse response.body
+      expect(json_response['exercise_strenght_test']['mr_weights'].values.uniq.first).to eq nil
     end
   end
 end

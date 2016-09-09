@@ -23,7 +23,7 @@ class ExerciseStrenghtTest < ActiveRecord::Base
 
   def self.default_mr_weights
     REPETITION_REGIONS.map { |repetitions|
-      [repetitions, -1]
+      [repetitions, nil]
     }.to_h
   end
 end

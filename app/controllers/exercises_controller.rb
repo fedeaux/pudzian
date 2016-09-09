@@ -4,11 +4,13 @@ class ExercisesController < ApplicationController
   # GET /exercises
   def index
     @exercises = Exercise.all
+    @categories = @exercises.map(&:categories).flatten.uniq
     render :index
   end
 
   # GET /exercises/1
   def show
+    render :show
   end
 
   private

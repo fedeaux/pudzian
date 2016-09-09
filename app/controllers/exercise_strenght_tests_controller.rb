@@ -16,6 +16,14 @@ class ExerciseStrenghtTestsController < ApplicationController
     render :show
   end
 
+  def update
+    @exercise_strenght_test = ExerciseStrenghtTest.find params[:id]
+    if @exercise_strenght_test.user.id == current_user.id
+      @exercise_strenght_test.update exercise_strenght_test_params
+      render :show
+    end
+  end
+
   private
     # Only allow a trusted parameter "white list" through.
     def exercise_strenght_test_params

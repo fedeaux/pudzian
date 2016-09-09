@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160909132012) do
+ActiveRecord::Schema.define(version: 20160909134127) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20160909132012) do
     t.integer "user_id"
     t.integer "exercise_id"
     t.date    "took_on"
+    t.decimal "precision",   precision: 4, scale: 2, default: "1.0"
     t.index ["exercise_id"], name: "index_exercise_strenght_tests_on_exercise_id", using: :btree
     t.index ["user_id"], name: "index_exercise_strenght_tests_on_user_id", using: :btree
   end

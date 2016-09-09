@@ -42,4 +42,14 @@ RSpec.describe Exercise, type: :model do
       expect(category.exercises).not_to include category
     end
   end
+
+  context '#strenght_test' do
+    let(:exercise_strenght_test) { create :exercise_strenght_test, user: create_or_find_user(:user_ray) }
+    let(:exercise) { create_or_find_exercise :exercise_benchpress }
+
+    it 'returns the strenght_test associated with the exercise and user' do
+      user = exercise_strenght_test.user
+      expect(exercise.strenght_test(user)).to eq exercise_strenght_test
+    end
+  end
 end

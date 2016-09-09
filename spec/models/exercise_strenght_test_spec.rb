@@ -36,5 +36,11 @@ RSpec.describe ExerciseStrenghtTest, type: :model do
       exercise_strenght_test.mr_weights = { 1 => 50, 2 => 45 }
       expect(exercise_strenght_test.mr_weights.values.uniq).to eq [50, 45, nil]
     end
+
+    it 'can be set even if the hash contains string keys instead of integers' do
+      exercise_strenght_test = ExerciseStrenghtTest.new exercise_strenght_test_attributes.except(:mr_weights)
+      exercise_strenght_test.mr_weights = { '1' => 50, '2' => 45 }
+      expect(exercise_strenght_test.mr_weights.values.uniq).to eq [50, 45, nil]
+    end
   end
 end

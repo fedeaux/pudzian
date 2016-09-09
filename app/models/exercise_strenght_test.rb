@@ -18,7 +18,7 @@ class ExerciseStrenghtTest < ActiveRecord::Base
   end
 
   def mr_weights=(hash)
-    super ExerciseStrenghtTest.default_mr_weights.merge hash
+    super ExerciseStrenghtTest.default_mr_weights.merge Hash[ hash.keys.map(&:to_i).zip(hash.values) ]
   end
 
   def self.default_mr_weights

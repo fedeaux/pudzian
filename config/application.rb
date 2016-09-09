@@ -17,7 +17,7 @@ module Pudzian
         origins '*'
         resource '*',
           headers: :any,
-          methods: [:get, :post, :options],
+          methods: :any,
           expose: ['access-token', 'expiry', 'token-type', 'uid', 'client']
       end
     end

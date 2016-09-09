@@ -9,4 +9,10 @@ class ExerciseStrenghtTest < ActiveRecord::Base
   serialize :mr_weights
 
   REPETITION_REGIONS = [2, 4, 6, 9, 12, 15, 18, 21, 25, 30, 40]
+
+  def self.default_mr_weights
+    REPETITION_REGIONS.map { |repetitions|
+      [repetitions, -1]
+    }.to_h
+  end
 end

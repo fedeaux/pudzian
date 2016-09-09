@@ -27,6 +27,6 @@ class ExerciseStrenghtTestsController < ApplicationController
   private
     # Only allow a trusted parameter "white list" through.
     def exercise_strenght_test_params
-      params.require(:exercise_strenght_test).permit(:exercise_id, :precision, :mr_weights => ExerciseStrenghtTest::REPETITION_REGIONS.map(&:to_s))
+      params.require(:exercise_strenght_test).permit(:exercise_id, :precision, :unit, :mr_weights => ExerciseStrenghtTest::REPETITION_REGIONS.map(&:to_s))
     end
 end

@@ -1,1 +1,1 @@
-attributes :id, :mr_weights, :exercise_id, :precision
+attributes :id, :mr_weights, :exercise_id, :precision, :unit

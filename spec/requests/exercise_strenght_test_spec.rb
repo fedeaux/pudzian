@@ -16,6 +16,7 @@ RSpec.describe "ExerciseStrenghtTest", type: :request do
       expect(json_response).to have_key 'exercise_strenght_test'
       expect(json_response['exercise_strenght_test']['mr_weights'].values).to eq exercise_strenght_test.mr_weights.values
       expect(json_response['exercise_strenght_test']['precision'].to_f).to eq 1.0
+      expect(json_response['exercise_strenght_test']['unit']).to eq 'kg'
     end
 
     it 'returns an empty default ExerciseStrenghtTest if the is no ExerciseStrenghtTest for the exercise' do

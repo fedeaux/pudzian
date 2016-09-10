@@ -23,4 +23,8 @@ class StrenghtBasedProgression < ApplicationRecord
       @string_repetitions_signature = nil
     end
   end
+
+  def repetitions_with_weights
+    repetitions_signature.repetitions
+  end
 end

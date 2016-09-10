@@ -31,4 +31,12 @@ RSpec.describe RepetitionsSignature, type: :model do
       expect(repetitions_signature.signature).to eq '6 15s/12 90s/6 15s/12 90s'
     end
   end
+
+  describe '#repetitions' do
+    let(:repetitions_signature) { create :repetitions_signature }
+
+    it 'returns an array of repetitions defined in the signature' do
+      expect(repetitions_signature.repetitions).to eq [6, 12, 6, 12]
+    end
+  end
 end

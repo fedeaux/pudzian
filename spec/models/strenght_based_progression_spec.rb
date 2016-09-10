@@ -36,4 +36,12 @@ RSpec.describe StrenghtBasedProgression, type: :model do
       expect(progression.repetitions_signature.signature).to eq RepetitionsSignature.normalize string_repetitions_signature
     end
   end
+
+  describe '#repetitions_with_weights' do
+    let(:strenght_based_progression) { create :strenght_based_progression }
+
+    it 'parses the signature assigning weights from the underlying ExerciseStrenghtTest' do
+      ap strenght_based_progressions.repetitions_with_weights
+    end
+  end
 end

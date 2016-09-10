@@ -17,4 +17,10 @@ class RepetitionsSignature < ApplicationRecord
       gsub(/\s*\/\s*/, '/').
       gsub(/(^\/+)|(\/+$)/, '')
   end
+
+  def repetitions
+    signature.split('/').map do |part|
+      part.gsub(/\d+s/, '').strip.to_i
+    end
+  end
 end

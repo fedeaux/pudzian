@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160909183012) do
+ActiveRecord::Schema.define(version: 20160910161234) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,26 @@ ActiveRecord::Schema.define(version: 20160909183012) do
     t.index ["user_id"], name: "index_exercises_on_user_id", using: :btree
   end
 
+  create_table "repetitions_signatures", force: :cascade do |t|
+    t.string   "signature"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_repetitions_signatures_on_user_id", using: :btree
+  end
+
+  create_table "strenght_based_progressions", force: :cascade do |t|
+    t.integer  "repetitions_signature_id"
+    t.integer  "exercise_strenght_test_id"
+    t.integer  "user_id"
+    t.decimal  "last_seen_strenght_level",  precision: 4, scale: 2, default: "1.0"
+    t.datetime "created_at",                                                        null: false
+    t.datetime "updated_at",                                                        null: false
+    t.index ["exercise_strenght_test_id"], name: "index_strenght_based_progressions_on_exercise_strenght_test_id", using: :btree
+    t.index ["repetitions_signature_id"], name: "index_strenght_based_progressions_on_repetitions_signature_id", using: :btree
+    t.index ["user_id"], name: "index_strenght_based_progressions_on_user_id", using: :btree
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at",                               null: false
@@ -73,4 +93,8 @@ ActiveRecord::Schema.define(version: 20160909183012) do
   add_foreign_key "exercise_strenght_tests", "exercises"
   add_foreign_key "exercise_strenght_tests", "users"
   add_foreign_key "exercises", "users"
+  add_foreign_key "repetitions_signatures", "users"
+  add_foreign_key "strenght_based_progressions", "exercise_strenght_tests"
+  add_foreign_key "strenght_based_progressions", "repetitions_signatures"
+  add_foreign_key "strenght_based_progressions", "users"
 end

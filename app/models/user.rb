@@ -5,4 +5,5 @@ class User < ApplicationRecord
          # :confirmable, :omniauthable
 
   include DeviseTokenAuth::Concerns::User
+  has_many :exercise_strenght_tests
 end

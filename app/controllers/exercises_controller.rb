@@ -3,8 +3,7 @@ class ExercisesController < ApplicationController
 
   # GET /exercises
   def index
-    @exercises = Exercise.all
-    @categories = @exercises.map(&:categories).flatten.uniq
+    @exercises = Exercise.all.map{ |exercise| exercise.set_has_strenght_test(current_user) }
     render :index
   end
 
@@ -21,6 +20,6 @@ class ExercisesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def exercise_params
-      params.require(:exercise).permit(:name, :user_id_id)
+      params.require(:exercise).permit(:name)
     end
 end

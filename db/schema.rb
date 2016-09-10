@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160908154532) do
+ActiveRecord::Schema.define(version: 20160909183012) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,17 @@ ActiveRecord::Schema.define(version: 20160908154532) do
   create_table "exercise_categories_exercises", force: :cascade do |t|
     t.integer "exercise_id"
     t.integer "exercise_category_id"
+  end
+
+  create_table "exercise_strenght_tests", force: :cascade do |t|
+    t.text    "mr_weights"
+    t.integer "user_id"
+    t.integer "exercise_id"
+    t.date    "took_on"
+    t.decimal "precision",   precision: 4, scale: 2, default: "1.0"
+    t.string  "unit",                                default: "kg"
+    t.index ["exercise_id"], name: "index_exercise_strenght_tests_on_exercise_id", using: :btree
+    t.index ["user_id"], name: "index_exercise_strenght_tests_on_user_id", using: :btree
   end
 
   create_table "exercises", force: :cascade do |t|
@@ -59,5 +70,7 @@ ActiveRecord::Schema.define(version: 20160908154532) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true, using: :btree
   end
 
+  add_foreign_key "exercise_strenght_tests", "exercises"
+  add_foreign_key "exercise_strenght_tests", "users"
   add_foreign_key "exercises", "users"
 end

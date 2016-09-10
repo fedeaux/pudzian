@@ -5,6 +5,7 @@ class ExerciseStrenghtTest < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :exercise
+  has_many :strenght_based_progressions
 
   serialize :mr_weights
   after_initialize :ensure_mr_weights

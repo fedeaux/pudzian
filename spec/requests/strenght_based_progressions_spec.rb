@@ -29,6 +29,23 @@ RSpec.describe "StrenghtBasedProgression", type: :request do
     end
   end
 
+  describe "GET strenght_based_progressions/:id" do
+    it 'returns the StrenghtBasedProgression' do
+      set_request_headers_for :user_ray
+      get strenght_based_progression_path(strenght_based_progression.id), headers: @request_headers
+      json_response = JSON.parse response.body
+
+      expect(json_response).to have_key 'strenght_based_progression'
+      expect(json_response['strenght_based_progression']).to have_key 'exercise'
+      expect(json_response['strenght_based_progression']).to have_key 'repetitions_signature'
+    end
+
+    it 'returns an error if the requesting user isn\'t the StrenghtBasedProgression owner' do
+      set_request_headers_for :user_steve
+      get strenght_based_progression_path(strenght_based_progression.id), headers: @request_headers
+      expect(response.status).to eq 401
+    end
+  end
 
   describe "POST strenght_based_progressions" do
     before :each do

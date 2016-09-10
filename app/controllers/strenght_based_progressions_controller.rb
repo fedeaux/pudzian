@@ -42,6 +42,16 @@ class StrenghtBasedProgressionsController < ApplicationController
     end
   end
 
+  def show
+    @strenght_based_progression = StrenghtBasedProgression.find params[:id]
+
+    if @strenght_based_progression.user.id == current_user.id
+      render :show
+    else
+      head 401
+    end
+  end
+
   private
     # Only allow a trusted parameter "white list" through.
     def strenght_based_progression_params

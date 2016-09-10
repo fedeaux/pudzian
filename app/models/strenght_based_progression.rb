@@ -25,6 +25,8 @@ class StrenghtBasedProgression < ApplicationRecord
   end
 
   def repetitions_with_weights
-    repetitions_signature.repetitions
+    repetitions_signature.repetitions.map { |repetitions|
+      [repetitions, exercise_strenght_test.mr_weights[repetitions]]
+    }
   end
 end

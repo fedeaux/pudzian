@@ -7,6 +7,7 @@ gem 'puma', '~> 3.0'
 # Utility
 gem 'string-urlize'
 gem 'seedbank'
+gem 'uglifier', '>= 1.3.0'
 
 # Modeling
 gem 'devise'

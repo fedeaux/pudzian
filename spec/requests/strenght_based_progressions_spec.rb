@@ -39,6 +39,7 @@ RSpec.describe "StrenghtBasedProgression", type: :request do
       expect(json_response['strenght_based_progression']).to have_key 'exercise'
       expect(json_response['strenght_based_progression']).to have_key 'repetitions_signature'
       expect(json_response['strenght_based_progression']).to have_key 'repetitions_with_weights'
+      expect(json_response['strenght_based_progression']).to have_key 'exercise_strenght_test'
     end
 
     it 'returns an error if the requesting user isn\'t the StrenghtBasedProgression owner' do

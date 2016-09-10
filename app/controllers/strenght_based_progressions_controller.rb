@@ -16,10 +16,22 @@ class StrenghtBasedProgressionsController < ApplicationController
   end
 
   def create
-    @strenght_based_progression = StrenghtBasedProgression.new strenght_based_progression_params
-    @strenght_based_progression.user = current_user
-    @strenght_based_progression.save
-    render :show
+    exercise = Exercise.find_by id: params[:strenght_based_progression][:exercise_id]
+
+    if exercise
+      @strenght_based_progression = StrenghtBasedProgression.new strenght_based_progression_params
+
+      if exercise.strenght_test(current_user)
+        @strenght_based_progression.exercise_strenght_test = exercise.strenght_test(current_user)
+        @strenght_based_progression.user = current_user
+        @strenght_based_progression.save
+        render :show
+      else
+        render json: { errors: ["Can't add a progression to an exercise without a strenght test"] }
+      end
+    else
+      render json: { errors: ['Exercise is required'] }
+    end
   end
 
   def update
@@ -33,6 +45,6 @@ class StrenghtBasedProgressionsController < ApplicationController
   private
     # Only allow a trusted parameter "white list" through.
     def strenght_based_progression_params
-      params.require(:strenght_based_progression).permit(:exercise_id, :precision, :unit, :mr_weights => ExerciseStrenghtTest::REPETITION_REGIONS.map(&:to_s))
+      params.require(:strenght_based_progression).permit(:string_repetitions_signature)
     end
 end

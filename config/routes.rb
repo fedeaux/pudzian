@@ -3,6 +3,9 @@ Rails.application.routes.draw do
 
   resources :exercises, only: [:show, :index]
   resources :exercise_strenght_tests, only: [:index, :create, :update]
-  resources :strenght_based_progressions, only: [:index, :create, :show]
+  resources :strenght_based_progressions, only: [:index, :create, :show] do
+    resources :strenght_based_progression_steps, only: [:index, :create, :destroy], as: :steps
+  end
+
   resources :users
 end

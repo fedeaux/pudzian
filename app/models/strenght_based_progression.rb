@@ -3,6 +3,7 @@ class StrenghtBasedProgression < ApplicationRecord
   belongs_to :exercise_strenght_test
   belongs_to :user
   has_one :exercise, through: :exercise_strenght_test
+  has_many :strenght_based_progression_steps
 
   def string_repetitions_signature=(string_repetitions_signature)
     if user

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160910161234) do
+ActiveRecord::Schema.define(version: 20160911140245) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,17 @@ ActiveRecord::Schema.define(version: 20160910161234) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_repetitions_signatures_on_user_id", using: :btree
+  end
+
+  create_table "strenght_based_progression_steps", force: :cascade do |t|
+    t.date     "done_at"
+    t.integer  "strenght_based_progression_id"
+    t.decimal  "strenght_level",                precision: 4, scale: 2, default: "1.0"
+    t.string   "planned_set"
+    t.string   "done_set"
+    t.datetime "created_at",                                                            null: false
+    t.datetime "updated_at",                                                            null: false
+    t.index ["strenght_based_progression_id"], name: "strenght_based_progression_to_steps_index", using: :btree
   end
 
   create_table "strenght_based_progressions", force: :cascade do |t|
@@ -94,6 +105,7 @@ ActiveRecord::Schema.define(version: 20160910161234) do
   add_foreign_key "exercise_strenght_tests", "users"
   add_foreign_key "exercises", "users"
   add_foreign_key "repetitions_signatures", "users"
+  add_foreign_key "strenght_based_progression_steps", "strenght_based_progressions"
   add_foreign_key "strenght_based_progressions", "exercise_strenght_tests"
   add_foreign_key "strenght_based_progressions", "repetitions_signatures"
   add_foreign_key "strenght_based_progressions", "users"

@@ -9,6 +9,7 @@ gem 'puma', '~> 3.0'
 gem 'string-urlize'
 gem 'seedbank'
 gem 'uglifier', '>= 1.3.0'
+gem 'dotenv-rails'
 
 # Modeling
 gem 'devise'
@@ -33,7 +34,6 @@ end
 
 group :development, :test do
   gem 'byebug', platform: :mri
-  gem 'dotenv-rails'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'log4r'
@@ -42,6 +42,12 @@ end
 
 group :development do
   gem 'listen', '~> 3.0.5'
+  gem 'capistrano'
+  gem 'capistrano3-puma'
+  gem 'capistrano-rails', require: false
+  gem 'capistrano-bundler', require: false
+  gem 'capistrano-rvm'
+  gem 'capistrano-rails-console'
 end
 
 group :production do

@@ -10,3 +10,11 @@ development:
 test:
   <<: *default
   database: test-pudzian
+
+production:
+  <<: *default
+  database: pudzian
+  username: postgresqluser
+  password: <%= ENV['PRODUCTION_DATABASE_PASSWORD'] %>
+  host: localhost
+  port: 5432

@@ -10,6 +10,7 @@ gem 'string-urlize'
 gem 'seedbank'
 gem 'uglifier', '>= 1.3.0'
 gem 'dotenv-rails'
+gem 'listen', '~> 3.0.5'
 
 # Modeling
 gem 'devise'
@@ -41,7 +42,6 @@ group :development, :test do
 end
 
 group :development do
-  gem 'listen', '~> 3.0.5'
   gem 'capistrano'
   gem 'capistrano3-puma'
   gem 'capistrano-rails', require: false
